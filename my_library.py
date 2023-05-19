@@ -8,11 +8,11 @@ def compute_probs(neg,pos):
   return [p0,p1]
 
 
-def cond_prob (table, a_evidence, corresponding_evidence_value, a_target, corresponding_target_value):
-  t_subset = up_table_subset(table, a_target, 'equals', corresponding_target_value)
+def cond_prob(table, a_evidence, corresponding_evidence_value, a_target, corresponding_target_value):
+  t_subset = up_table_subset(table, target, 'equals', corresponding_target_value)
   e_list = up_get_column(t_subset, a_evidence)
   p_b_a = sum([1 if v==corresponding_evidence_value else 0 for v in e_list])/len(e_list)
-  return p_b_a
+  return p_b_a + .01  #Laplace smoothing factor
 
 
 def cond_probs_product (table, evidence_row, a_target, corresponding_target_value):

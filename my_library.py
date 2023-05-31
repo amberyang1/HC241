@@ -73,3 +73,22 @@ def metrics(a_list):
   accuracy = sum(p==a for p,a in a_list)/len(a_list)
 
   return {'Precision': precision, 'Recall': recall, 'F1': f1, 'Accuracy': accuracy}
+
+
+#loop through your architecutes and get results
+for archs in all_architectures:
+  all_results = up_neural_net(train_table, test_table, archs, target)
+  
+  all_mets = []
+  #loop through thresholds
+  for t in thresholds:
+    all_predictions = [1 if pos>=t else 0 for neg,pos in all_results]
+    pred_act_list = up_zip_lists(all_predictions, up_get_column(test_table, target))
+    mets = metrics(pred_act_list)
+    mets['Threshold'] = t
+    all_mets = all_mets + [mets]
+
+  metrics_table = up_metrics_table(all_mets)
+
+  print(f'Architecture: {archs}')
+  print(up_metrics_table(all_mets))

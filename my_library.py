@@ -59,7 +59,7 @@ def metrics(a_list):
     assert isinstance(item, list), f'Expecting a_list to be a list of lists'
     assert len(item) == 2, f'Expecting a_list to be a zipped list with each value being a pair of items'
     for value in item:
-      assert isinstance(value, int), f'Expecting each value in the pair to be an int'
+      assert isinstance(value, (int, float)), f'Expecting each value in the pair to be an int'
       assert value >= 0, f'Expecting each value in the pair to be >= 0'
 
   TN = sum([1 if pair==[0,0] else 0 for pair in a_list])

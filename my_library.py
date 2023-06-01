@@ -93,8 +93,6 @@ def try_archs(full_table, target, architectures, thresholds):
       mets['Threshold'] = t
       all_mets = all_mets + [mets]
       
-    metrics_table = up_metrics_table(all_mets)
-
     print(f'Architecture: {structure}')
     print(up_metrics_table(all_mets))
 
